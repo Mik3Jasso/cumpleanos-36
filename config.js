@@ -24,7 +24,7 @@ window.PARTY = {
     "Otro año, otro nivel desbloqueado. Quiero compartir el 36 contigo: comida, música y buena compañía. ¡Confirma para que te guarde lugar!",
 
   // URL del Apps Script publicado (ver SETUP.md). Vacío = modo demo local.
-  apiUrl: "",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxEoe_2nD2qD0YCVRCu7bdiB1OHUoV-Igw9DF7JlyenMaCvD75Uz5mEIAx_lmqJ-GtR/exec",
 
   // Invitados de ejemplo para el modo demo (solo se usan si apiUrl está vacío).
   // Prueba: index.html?i=demo-ana  |  ?i=demo-luis
