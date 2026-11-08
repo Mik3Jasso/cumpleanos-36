@@ -4,7 +4,7 @@
 window.PARTY = {
   // Paleta: rojo | amarillo | cristal | plata | charmander | pocket
   // (para probar sin tocar código: agrega ?tema=cristal al link)
-  tema: "rojo",
+  tema: "cristal",
 
   anfitrion: "Miguel",
   edad: 36,
