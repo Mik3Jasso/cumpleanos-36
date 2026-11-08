@@ -5,7 +5,7 @@ Sitio final: **https://cumple.mikejasso.com.mx**
 ## 1. Hoja de Google + API (5 min)
 1. Crea una hoja de Google y renombra la pestaña a **Invitados**.
 2. `Archivo > Importar > Subir` → `invitados.csv` (local, NO está en git) → "Reemplazar hoja actual".
-   Ya trae nombre, max_personas, id y link de cada invitado.
+   Columnas: nombre, honor (casilla; `TRUE` = invitado de honor), max_personas, id, link, asistencia, acompanante, fecha_respuesta.
 3. `Extensiones > Apps Script`, pega `apps-script/Code.gs`.
 4. `Implementar > Nueva implementación > Aplicación web`: ejecutar como **Yo**, acceso **Cualquier persona**. Copia la URL `/exec`.
 5. Pega esa URL en `config.js` → `apiUrl`.

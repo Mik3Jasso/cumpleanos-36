@@ -35,6 +35,7 @@
     star: ["...00...", "...00...", "00000000", ".000000.", "..0000..", "..0..0..", ".0....0.", "0......0"],
     flag: ["0000....", "00000...", "000000..", "0000....", "0.......", "0.......", "0.......", "0......."],
     heart: [".00..00.", "00000000", "00000000", "00000000", ".000000.", "..0000..", "...00...", "........"],
+    crown: ["0..00..0", "00.00.00", "00000000", "00000000", "00000000", "00000000", "........", "........"],
   };
   function sprite(name) {
     var rows = SPR[name], NS = "http://www.w3.org/2000/svg";
@@ -63,7 +64,7 @@
     if (demo) {
       var g = P.demoGuests[id], saved = null;
       try { saved = JSON.parse(localStorage.getItem("rsvp-demo-" + id)); } catch (e) {}
-      return Promise.resolve(g ? { ok: true, nombre: g.nombre, max: g.max, respuesta: saved } : { ok: false });
+      return Promise.resolve(g ? { ok: true, nombre: g.nombre, max: g.max, honor: !!g.honor, respuesta: saved } : { ok: false });
     }
     return fetch(P.apiUrl + "?i=" + encodeURIComponent(id)).then(function (r) { return r.json(); });
   }
@@ -163,7 +164,7 @@
   // ---------- RSVP ----------
   function partyList(plusOn) {
     var ul = el("ul", { class: "party" });
-    ul.appendChild(el("li", {}, [sprite("heart"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: "JUGADOR 1" })]));
+    ul.appendChild(el("li", { class: guest.honor ? "honor-slot" : "" }, [sprite(guest.honor ? "crown" : "heart"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: guest.honor ? "INVITADO DE HONOR" : "JUGADOR 1" })]));
     if (guest.max > 1) {
       var li = el("li", { class: plusOn ? "" : "empty" }, [
         sprite("heart"),
@@ -194,10 +195,13 @@
 
   function renderStatus(r, celebrate) {
     var yes = r.asistencia === "si";
-    var box = el("div", { class: "unlocked" + (yes ? "" : " no"), role: "status" }, [
-      el("h3", { text: yes ? "¡NIVEL DESBLOQUEADO!" : "TE VOY A EXTRAÑAR" }),
-      el("p", { text: yes ? "Estás confirmado" + (r.acompanante ? " con tu acompañante" : "") + ". Nos vemos el " + P.fechaTexto + "." : "Gracias por avisar. Te voy a extrañar." }),
-    ]);
+    var vip = !!guest.honor;
+    var kids = [
+      el("h3", { text: yes ? (vip ? "¡LOGRO DESBLOQUEADO!" : "¡NIVEL DESBLOQUEADO!") : "TE VOY A EXTRAÑAR" }),
+      el("p", { text: yes ? (vip ? "Tu lugar de honor está confirmado" : "Tu lugar está confirmado") + (r.acompanante ? ", y el de tu acompañante también" : "") + ". Nos vemos el " + P.fechaTexto + "." : "Gracias por avisar. Te voy a extrañar." }),
+    ];
+    if (yes && vip) kids.unshift(el("span", { class: "badge", text: "★ INVITADO DE HONOR" }));
+    var box = el("div", { class: "unlocked" + (yes ? "" : " no") + (vip ? " honor" : ""), role: "status" }, kids);
     var b = el("button", { class: "btn ghost", type: "button", text: "CAMBIAR RESPUESTA" });
     b.addEventListener("click", function () { renderForm(r); });
     box.appendChild(b);
@@ -259,6 +263,16 @@
     if (demo) body.appendChild(el("p", { class: "demo", text: "MODO DEMO: las respuestas solo se guardan en este navegador." }));
   }
 
+  function applyHonor() {
+    var rb = $("ribbon");
+    rb.appendChild(sprite("crown"));
+    rb.appendChild(el("span", { text: "INVITADO DE HONOR" }));
+    rb.appendChild(sprite("crown"));
+    rb.hidden = false;
+    $("title-card").classList.add("honor");
+    $("rsvp").classList.add("honor");
+  }
+
   function init() {
     renderStatic(); tick(); timer = setInterval(tick, 1000);
     if (!token) return renderNoLink();
@@ -266,7 +280,10 @@
     apiGet(token).then(function (g) {
       if (!g || !g.ok) return renderNoLink();
       guest = g;
-      speak("¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
+      if (g.honor) applyHonor();
+      speak(g.honor
+        ? "¡" + g.nombre + "! Estás en mi lista de invitados de honor. Acabo de subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
+        : "¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
       if (g.respuesta && g.respuesta.asistencia) renderStatus(g.respuesta, false); else renderForm(null);
     }).catch(function () {
       speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party!");

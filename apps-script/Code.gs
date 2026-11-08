@@ -3,8 +3,8 @@
  * de tu hoja de Google. Ver SETUP.md.
  *
  * Hoja "Invitados" (fila 1 = encabezados):
- *   A nombre | B max_personas | C id | D link | E asistencia | F acompanante | G fecha_respuesta
- * Tú llenas A y B. C y D se generan con el menú "Invitación > Generar links".
+ *   A nombre | B honor | C max_personas | D id | E link | F asistencia | G acompanante | H fecha_respuesta
+ * Tú llenas A, B (casilla de invitado de honor) y C. D y E se generan con el menú "Invitación > Generar links".
  */
 var SHEET = "Invitados";
 var SITE_URL = "https://cumple.mikejasso.com.mx/"; // ← cambia por tu dominio final
@@ -19,19 +19,19 @@ function generarLinks() {
   var sh = SpreadsheetApp.getActive().getSheetByName(SHEET);
   var rows = sh.getLastRow();
   if (rows < 2) return;
-  var data = sh.getRange(2, 1, rows - 1, 4).getValues();
+  var data = sh.getRange(2, 1, rows - 1, 5).getValues();
   var used = {};
-  data.forEach(function (r) { if (r[2]) used[r[2]] = true; });
+  data.forEach(function (r) { if (r[3]) used[r[3]] = true; });
   data.forEach(function (r, i) {
     if (!r[0]) return;
-    if (!r[2]) {
+    if (!r[3]) {
       var id;
       do { id = slug_(r[0]) + "-" + Math.random().toString(36).slice(2, 6); } while (used[id]);
       used[id] = true;
-      r[2] = id;
+      r[3] = id;
     }
-    r[3] = SITE_URL + "?i=" + r[2];
-    sh.getRange(i + 2, 3, 1, 2).setValues([[r[2], r[3]]]);
+    r[4] = SITE_URL + "?i=" + r[3];
+    sh.getRange(i + 2, 4, 1, 2).setValues([[r[3], r[4]]]);
   });
 }
 
@@ -44,7 +44,7 @@ function find_(sh, id) {
   if (!id) return null;
   var rows = sh.getLastRow();
   if (rows < 2) return null;
-  var ids = sh.getRange(2, 3, rows - 1, 1).getValues();
+  var ids = sh.getRange(2, 4, rows - 1, 1).getValues();
   for (var i = 0; i < ids.length; i++) {
     if (String(ids[i][0]).toLowerCase() === id) return i + 2;
   }
@@ -61,9 +61,10 @@ function doGet(e) {
   var sh = SpreadsheetApp.getActive().getSheetByName(SHEET);
   var row = find_(sh, id);
   if (!row) return json_({ ok: false });
-  var v = sh.getRange(row, 1, 1, 6).getValues()[0];
-  var out = { ok: true, nombre: String(v[0]).split(" ")[0], max: Number(v[1]) || 1, respuesta: null };
-  if (v[4]) out.respuesta = { asistencia: v[4], acompanante: v[5] === "Sí" };
+  var v = sh.getRange(row, 1, 1, 7).getValues()[0];
+  var honor = v[1] === true || String(v[1]).toLowerCase() === "true";
+  var out = { ok: true, nombre: String(v[0]).split(" ")[0], honor: honor, max: Number(v[2]) || 1, respuesta: null };
+  if (v[5]) out.respuesta = { asistencia: v[5], acompanante: v[6] === "Sí" };
   return json_(out);
 }
 
@@ -78,9 +79,9 @@ function doPost(e) {
     var row = find_(sh, id);
     if (!row) return json_({ ok: false, error: "invitado no encontrado" });
     if (b.asistencia !== "si" && b.asistencia !== "no") return json_({ ok: false, error: "dato inválido" });
-    var max = Number(sh.getRange(row, 2).getValue()) || 1;
+    var max = Number(sh.getRange(row, 3).getValue()) || 1;
     var plus = b.asistencia === "si" && b.acompanante === true && max > 1;
-    sh.getRange(row, 5, 1, 3).setValues([[
+    sh.getRange(row, 6, 1, 3).setValues([[
       b.asistencia === "si" ? "Sí" : "No",
       plus ? "Sí" : "No",
       new Date()

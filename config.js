@@ -28,7 +28,7 @@ window.PARTY = {
   // Invitados de ejemplo para modo demo (solo en localhost con ?demo=1, o si apiUrl está vacío).
   // Prueba: http://localhost:8765/?demo=1&i=demo-ana  |  &i=demo-luis
   demoGuests: {
-    "demo-ana": { nombre: "Ana", max: 2 },
+    "demo-ana": { nombre: "Ana", max: 2, honor: true },
     "demo-luis": { nombre: "Luis", max: 1 },
   },
 };
