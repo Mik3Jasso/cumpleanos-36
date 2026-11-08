@@ -5,29 +5,28 @@ window.PARTY = {
   anfitrion: "Miguel",
   edad: 36,
 
-  // Fecha y hora de inicio. Ajusta el offset a tu zona horaria
-  // (-06:00 = CDMX/centro de México sin horario de verano).
+  // Fecha y hora de inicio (Guadalajara: -06:00).
   fechaISO: "2026-11-22T18:00:00-06:00",
+  inicioISO: "2026-11-08T00:00:00-06:00", // desde cuándo corre la barra de XP
   fechaTexto: "Domingo 22 de noviembre, 2026",
+  fechaCorta: "DOM 22 NOV",
   horaTexto: "6:00 PM",
 
-  // ⚠️ PENDIENTES: reemplaza con los datos reales
   lugarNombre: "Santas Patronas",
   lugarDireccion: "Calle Efraín González Luna 2014, Col. Americana, Obrera, 44160 Guadalajara, Jal.",
   lugarMapsUrl: "https://maps.app.goo.gl/49Ko8pdphp9FQyoFA",
   vestimenta: "Libre, ven cómodo",
   fechaLimite: "Sábado 21 de noviembre",
-  contactoTexto: "Dudas por WhatsApp",
-  contactoWhatsApp: "", // solo dígitos con lada, ej. 5215512345678 (vacío = oculto)
+  contactoWhatsApp: "", // solo dígitos con lada, ej. 5213312345678 (vacío = oculto)
 
-  mensaje:
-    "Otro año, otro nivel desbloqueado. Quiero compartir el 36 contigo: comida, música y buena compañía. ¡Confirma para que te guarde lugar!",
+  // Texto final del diálogo de bienvenida
+  mensaje: "Trae ganas de pasarla bien. Confirma antes del sábado para que te guarde lugar en la party.",
 
   // URL del Apps Script publicado (ver SETUP.md). Vacío = modo demo local.
   apiUrl: "https://script.google.com/macros/s/AKfycbxEoe_2nD2qD0YCVRCu7bdiB1OHUoV-Igw9DF7JlyenMaCvD75Uz5mEIAx_lmqJ-GtR/exec",
 
-  // Invitados de ejemplo para el modo demo (solo se usan si apiUrl está vacío).
-  // Prueba: index.html?i=demo-ana  |  ?i=demo-luis
+  // Invitados de ejemplo para modo demo (solo en localhost con ?demo=1, o si apiUrl está vacío).
+  // Prueba: http://localhost:8765/?demo=1&i=demo-ana  |  &i=demo-luis
   demoGuests: {
     "demo-ana": { nombre: "Ana", max: 2 },
     "demo-luis": { nombre: "Luis", max: 1 },

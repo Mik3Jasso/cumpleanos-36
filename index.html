@@ -4,52 +4,68 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nivel 36 · Invitación de cumpleaños</title>
-  <meta name="description" content="Estás invitado al cumpleaños número 36. Confirma tu asistencia.">
+  <meta name="description" content="Miguel sube al nivel 36. Confirma tu asistencia a la fiesta.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0f0e2a">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Crect width='8' height='8' fill='%230f0e2a'/%3E%3Cpath d='M2 1h4v1h1v4h-1v1h-4v-1h-1v-4h1z' fill='%23ffd23f'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0f380f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Crect width='8' height='8' fill='%230f380f'/%3E%3Cpath d='M3 1h2v1h2v1h-1v2h-1v1h1v1h-4v-1h1v-1h-1v-2h-1v-1h2z' fill='%239bbc0f'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
+  <header class="hud">
+    <span class="hud-name">MIGUEL</span>
+    <span class="hud-lv">LV.36</span>
+    <span class="hud-hp" aria-hidden="true">HP <span id="hud-hearts"></span></span>
+    <span class="hud-date" id="hud-date"></span>
+  </header>
 
   <main class="wrap">
-    <header class="hero">
-      <p class="tag blink">▶ PLAYER 1 · PRESS START</p>
-      <h1 class="title" aria-label="Nivel 36">
-        <span class="title-small">NIVEL</span>
-        <span class="title-big">36</span>
-      </h1>
-      <p class="sub" id="greeting">Cargando tu invitación…</p>
-    </header>
-
-    <section class="panel" aria-labelledby="h-count">
-      <h2 id="h-count" class="panel-title">⏱ Cuenta regresiva</h2>
-      <div class="count" id="count" role="timer" aria-live="off">
-        <div><b id="c-d">--</b><small>DÍAS</small></div>
-        <div><b id="c-h">--</b><small>HRS</small></div>
-        <div><b id="c-m">--</b><small>MIN</small></div>
-        <div><b id="c-s">--</b><small>SEG</small></div>
+    <section class="hero" aria-labelledby="t">
+      <div class="window title-card">
+        <p class="kicker">NUEVO NIVEL DESBLOQUEADO</p>
+        <div class="title-row">
+          <h1 id="t"><span class="t-small">NIVEL</span><span class="t-big">36</span></h1>
+          <div class="cake" id="cake" aria-hidden="true"></div>
+        </div>
       </div>
+
+      <div class="window dark dialog" id="dialog">
+        <p class="speaker">MIGUEL</p>
+        <p class="speech" id="speech"></p>
+        <span class="more" aria-hidden="true">▼</span>
+      </div>
+
+      <ul class="quick" id="quick"></ul>
+      <a class="btn cta" href="#rsvp">▶ CONFIRMAR ASISTENCIA</a>
     </section>
 
-    <section class="panel" aria-labelledby="h-info">
-      <h2 id="h-info" class="panel-title">🗺 Datos del evento</h2>
-      <p class="msg" id="msg"></p>
-      <dl class="info" id="info"></dl>
-      <div class="actions" id="actions"></div>
-    </section>
+    <div class="stack">
+      <section class="window" aria-labelledby="h-quest">
+        <h2 id="h-quest" class="w-title">EVENTO</h2>
+        <dl class="quest" id="quest"></dl>
+        <ul class="menu" id="menu"></ul>
+      </section>
 
-    <section class="panel" id="rsvp" aria-labelledby="h-rsvp">
-      <h2 id="h-rsvp" class="panel-title">🎮 Confirma tu asistencia</h2>
-      <div id="rsvp-body" aria-live="polite"></div>
-    </section>
+      <section class="window" aria-labelledby="h-time">
+        <h2 id="h-time" class="w-title">TIEMPO RESTANTE</h2>
+        <div class="count" id="count" role="timer" aria-live="off">
+          <div><b id="c-d">--</b><small>DÍAS</small></div>
+          <div><b id="c-h">--</b><small>HRS</small></div>
+          <div><b id="c-m">--</b><small>MIN</small></div>
+          <div><b id="c-s">--</b><small>SEG</small></div>
+        </div>
+        <div class="xp" aria-hidden="true"><span class="xp-bar"><i id="xp-fill"></i></span><span class="xp-txt" id="xp-txt">CARGANDO…</span></div>
+      </section>
 
-    <footer class="foot">© 2026 · Hecho con ♥ y pixeles</footer>
+      <section class="window rsvp" id="rsvp" aria-labelledby="h-rsvp">
+        <h2 id="h-rsvp" class="w-title">TU PARTY</h2>
+        <div id="rsvp-body" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <footer class="foot">© 2026 · Hecho con pixeles y cariño</footer>
   </main>
 
   <script src="config.js"></script>
