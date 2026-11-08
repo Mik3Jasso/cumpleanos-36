@@ -20,7 +20,7 @@ window.PARTY = {
   contactoWhatsApp: "", // solo dígitos con lada, ej. 5213312345678 (vacío = oculto)
 
   // Texto final del diálogo de bienvenida
-  mensaje: "Trae ganas de pasarla bien. Confirma antes del sábado para que te guarde lugar en la party.",
+  mensaje: "Trae ganas de pasarla bien. Confirma antes del sábado para guardarte tu lugar.",
 
   // URL del Apps Script publicado (ver SETUP.md). Vacío = modo demo local.
   apiUrl: "https://script.google.com/macros/s/AKfycbxEoe_2nD2qD0YCVRCu7bdiB1OHUoV-Igw9DF7JlyenMaCvD75Uz5mEIAx_lmqJ-GtR/exec",

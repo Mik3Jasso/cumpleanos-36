@@ -122,7 +122,7 @@
     }
     if (P.lugarMapsUrl) item(P.lugarMapsUrl, "VER MAPA", true);
     item(calendarUrl(), "AGREGAR AL CALENDARIO", true);
-    if (P.contactoWhatsApp) item("https://wa.me/" + P.contactoWhatsApp, "ESCRIBIR A MIGUEL", true);
+    if (P.contactoWhatsApp) item("https://wa.me/" + P.contactoWhatsApp, "WHATSAPP", true);
   }
 
   // ---------- diálogo con efecto máquina de escribir ----------
@@ -186,17 +186,17 @@
   }
 
   function renderNoLink() {
-    speak("¡Miguel acaba de subir al nivel 36 y quiere celebrarlo en su party! " + P.mensaje);
+    speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party! " + P.mensaje);
     $("rsvp-body").replaceChildren(
-      el("p", { class: "note", text: "Para confirmar necesitas tu link personal de invitación. Si no lo tienes o no te funciona, escríbele a Miguel y te lo reenvía." })
+      el("p", { class: "note", text: "Para confirmar necesitas tu link personal de invitación. Si no lo tienes o no te funciona, escríbeme y te lo reenvío." })
     );
   }
 
   function renderStatus(r, celebrate) {
     var yes = r.asistencia === "si";
     var box = el("div", { class: "unlocked" + (yes ? "" : " no"), role: "status" }, [
-      el("h3", { text: yes ? "¡NIVEL DESBLOQUEADO!" : "TE EXTRAÑAREMOS" }),
-      el("p", { text: yes ? "Estás confirmado" + (r.acompanante ? " con tu acompañante" : "") + ". Nos vemos el " + P.fechaTexto + "." : "Gracias por avisar, Miguel lo sabe. Te vamos a extrañar." }),
+      el("h3", { text: yes ? "¡NIVEL DESBLOQUEADO!" : "TE VOY A EXTRAÑAR" }),
+      el("p", { text: yes ? "Estás confirmado" + (r.acompanante ? " con tu acompañante" : "") + ". Nos vemos el " + P.fechaTexto + "." : "Gracias por avisar. Te voy a extrañar." }),
     ]);
     var b = el("button", { class: "btn ghost", type: "button", text: "CAMBIAR RESPUESTA" });
     b.addEventListener("click", function () { renderForm(r); });
@@ -266,10 +266,10 @@
     apiGet(token).then(function (g) {
       if (!g || !g.ok) return renderNoLink();
       guest = g;
-      speak("¡" + g.nombre + "! Miguel acaba de subir al nivel 36 y te necesita en su party. " + P.mensaje);
+      speak("¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
       if (g.respuesta && g.respuesta.asistencia) renderStatus(g.respuesta, false); else renderForm(null);
     }).catch(function () {
-      speak("¡Miguel acaba de subir al nivel 36 y quiere celebrarlo en su party!");
+      speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party!");
       $("rsvp-body").replaceChildren(el("p", { class: "err", text: "No pudimos cargar tu invitación. Recarga la página." }));
     });
   }
