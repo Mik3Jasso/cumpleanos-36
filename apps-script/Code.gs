@@ -7,7 +7,7 @@
  * Tú llenas A y B. C y D se generan con el menú "Invitación > Generar links".
  */
 var SHEET = "Invitados";
-var SITE_URL = "https://TU-DOMINIO.com/"; // ← cambia por tu dominio final
+var SITE_URL = "https://cumple.mikejasso.com.mx/"; // ← cambia por tu dominio final
 
 function onOpen() {
   SpreadsheetApp.getUi().createMenu("Invitación")

@@ -1,26 +1,33 @@
 # Puesta en marcha
 
+Sitio final: **https://cumple.mikejasso.com.mx**
+
 ## 1. Hoja de Google + API (5 min)
 1. Crea una hoja de Google y renombra la pestaña a **Invitados**.
-2. Fila 1, encabezados: `nombre | max_personas | id | link | asistencia | acompanante | fecha_respuesta`.
-3. Llena solo **nombre** y **max_personas** (1 = solo él/ella, 2 = con +1). Hay ejemplo en `invitados.template.csv`.
-4. `Extensiones > Apps Script`, pega `apps-script/Code.gs`, y cambia `SITE_URL` por tu dominio.
-5. `Implementar > Nueva implementación > Aplicación web`: ejecutar como **Yo**, acceso **Cualquier persona**. Copia la URL que termina en `/exec`.
-6. Pega esa URL en `config.js` → `apiUrl`.
-7. Recarga la hoja → menú **Invitación > Generar links**. La columna `link` queda lista para mandar por WhatsApp.
+2. `Archivo > Importar > Subir` → `invitados.csv` (local, NO está en git) → "Reemplazar hoja actual".
+   Ya trae nombre, max_personas, id y link de cada invitado.
+3. `Extensiones > Apps Script`, pega `apps-script/Code.gs`.
+4. `Implementar > Nueva implementación > Aplicación web`: ejecutar como **Yo**, acceso **Cualquier persona**. Copia la URL `/exec`.
+5. Pega esa URL en `config.js` → `apiUrl`.
+6. Para agregar invitados luego: escribe nombre y max_personas, y usa el menú **Invitación > Generar links**.
 
-## 2. Datos del evento
-Edita `config.js` (lugar, vestimenta, fecha límite, WhatsApp, mensaje).
-
-## 3. GitHub Pages + dominio
+## 2. GitHub Pages
 ```bash
-git add . && git commit -m "Invitación nivel 36"
+git add . && git commit -m "Config final"
 gh repo create cumpleanos-36 --public --source=. --push
 ```
-Repo → Settings → Pages → Branch `main` / root. En "Custom domain" pon tu dominio o subdominio
-y crea en tu DNS un `CNAME` hacia `TU-USUARIO.github.io`. Activa **Enforce HTTPS**.
+Repo → Settings → Pages → Branch `main` / root. El archivo `CNAME` ya apunta a `cumple.mikejasso.com.mx`.
+
+## 3. DNS del subdominio
+En el DNS de `mikejasso.com.mx` agrega, igual que `dev` y `fotografia`:
+
+| Tipo  | Nombre | Valor                 |
+|-------|--------|-----------------------|
+| CNAME | cumple | `mik3jasso.github.io` |
+
+Cuando GitHub verifique el dominio, activa **Enforce HTTPS** en Pages.
 
 ## Notas
-- Si `apiUrl` está vacío, el sitio funciona en modo demo: prueba `index.html?i=demo-ana` y `?i=demo-luis`.
-- Si cambias el código del script, hay que crear una **nueva versión** de la implementación.
-- La página tiene `noindex` para que Google no la indexe; solo entra quien tenga el link.
+- Sin `apiUrl`, el sitio corre en modo demo: `index.html?i=demo-ana` y `?i=demo-luis`.
+- Si cambias `Code.gs`, crea una **nueva versión** de la implementación.
+- `invitados.csv` contiene los links personales: no lo subas a un repo público.

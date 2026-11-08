@@ -12,11 +12,11 @@ window.PARTY = {
   horaTexto: "6:00 PM",
 
   // ⚠️ PENDIENTES: reemplaza con los datos reales
-  lugarNombre: "Por confirmar",
-  lugarDireccion: "Dirección por confirmar",
-  lugarMapsUrl: "", // link de Google Maps (déjalo vacío para ocultar el botón)
-  vestimenta: "Por confirmar",
-  fechaLimite: "Por confirmar",
+  lugarNombre: "Santas Patronas",
+  lugarDireccion: "Calle Efraín González Luna 2014, Col. Americana, Obrera, 44160 Guadalajara, Jal.",
+  lugarMapsUrl: "https://maps.app.goo.gl/49Ko8pdphp9FQyoFA",
+  vestimenta: "Libre, ven cómodo",
+  fechaLimite: "Sábado 21 de noviembre",
   contactoTexto: "Dudas por WhatsApp",
   contactoWhatsApp: "", // solo dígitos con lada, ej. 5215512345678 (vacío = oculto)
 
