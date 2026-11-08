@@ -2,6 +2,10 @@
 //  CONFIGURACIÓN — edita solo este archivo para cambiar datos
 // ============================================================
 window.PARTY = {
+  // Paleta: rojo | amarillo | cristal | plata | charmander | pocket
+  // (para probar sin tocar código: agrega ?tema=cristal al link)
+  tema: "rojo",
+
   anfitrion: "Miguel",
   edad: 36,
 
@@ -23,7 +27,7 @@ window.PARTY = {
   mensaje: "Trae ganas de pasarla bien. Confirma antes del sábado para guardarte tu lugar.",
 
   // URL del Apps Script publicado (ver SETUP.md). Vacío = modo demo local.
-  apiUrl: "https://script.google.com/macros/s/AKfycbxEoe_2nD2qD0YCVRCu7bdiB1OHUoV-Igw9DF7JlyenMaCvD75Uz5mEIAx_lmqJ-GtR/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbwWvSq-8pCRKRiMpCt22BUqjIUA5ZpBDWVwv9tuMO6Mwd-L793GBgSkPY0EpC6eLSDu/exec",
 
   // Invitados de ejemplo para modo demo (solo en localhost con ?demo=1, o si apiUrl está vacío).
   // Prueba: http://localhost:8765/?demo=1&i=demo-ana  |  &i=demo-luis

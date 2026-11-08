@@ -14,6 +14,7 @@
   --red: #c0392f;
   --red-lt: #ee8c83;
   --gold: #f0c13a;  /* solo para invitados de honor */
+  --on-page: #f5f5f2; /* texto directamente sobre el fondo de página */
   --gut: 16px;
   --notch: 4px;
   --f-display: "Press Start 2P", monospace;
@@ -30,6 +31,38 @@ body {
     linear-gradient(45deg, var(--c2) 25%, transparent 25%, transparent 75%, var(--c2) 75%);
   background-size: 8px 8px; background-position: 0 0, 4px 4px;
 }
+/* ---------- Temas (se eligen con ?tema=nombre o PARTY.tema en config.js) ---------- */
+/* Amarillo: Pokémon Amarillo, página amarilla, tinta carbón, acento rojo */
+html[data-tema="amarillo"] {
+  --c0: #2a2118; --c1: #6b5a3f; --c2: #d2a41a; --c3: #e8b923; --c4: #faf9f5; --shade: #ebe8df;
+  --navy: #2e2a26; --navy-dk: #1a1714; --navy-lt: #4a443d; --on-navy-dim: #cfc8bb;
+  --red: #b8322a; --red-lt: #ee8c83; --on-page: #2a2118;
+}
+/* Cristal: Pokémon Cristal, verde azulado profundo, acento coral */
+html[data-tema="cristal"] {
+  --c0: #12303a; --c1: #4b6870; --c2: #1f6b76; --c3: #247a86; --c4: #f3f9f9; --shade: #dfeded;
+  --navy: #123e48; --navy-dk: #0a2a31; --navy-lt: #1d5864; --on-navy-dim: #b5d3d8;
+  --red: #c9472f; --red-lt: #f0a090; --on-page: #f3f9f9;
+}
+/* Plata: Pokémon Plata, gris pizarra, acento naranja */
+html[data-tema="plata"] {
+  --c0: #1c2128; --c1: #555d6b; --c2: #7a8493; --c3: #8a94a3; --c4: #f2f3f5; --shade: #e1e4e8;
+  --navy: #2b3340; --navy-dk: #181d26; --navy-lt: #414c5d; --on-navy-dim: #c1c8d4;
+  --red: #c4461a; --red-lt: #f2a07f; --on-page: #1c2128;
+}
+/* Charmander: naranja quemado, tinta café, acento rojo ladrillo */
+html[data-tema="charmander"] {
+  --c0: #2b1a10; --c1: #6a5445; --c2: #cb6a2a; --c3: #e07a35; --c4: #fbf8f4; --shade: #efe8df;
+  --navy: #3b2417; --navy-dk: #24140b; --navy-lt: #5a3a28; --on-navy-dim: #dcc7b8;
+  --red: #b3321f; --red-lt: #f0a08f; --on-page: #2b1a10;
+}
+/* Pocket: Game Boy Pocket en blanco y negro; solo el dorado de los invitados de honor tiene color */
+html[data-tema="pocket"] {
+  --c0: #17181a; --c1: #5c5f63; --c2: #a3a39f; --c3: #b4b4b0; --c4: #f6f6f4; --shade: #e2e2df;
+  --navy: #232528; --navy-dk: #111214; --navy-lt: #3d4044; --on-navy-dim: #c4c6c9;
+  --red: #17181a; --red-lt: #9a9c9f; --on-page: #17181a;
+}
+
 svg.spr { display: block; shape-rendering: crispEdges; }
 .c0 { fill: var(--c0); } .c1 { fill: var(--c1); } .c2 { fill: var(--c2); } .c3 { fill: var(--c3); }
 
@@ -187,7 +220,7 @@ a:focus-visible, button:focus-visible, .choice:has(input:focus-visible), .check:
 .conf { position: absolute; top: -10px; width: 8px; height: 8px; background: var(--navy); animation: fall 1.8s steps(14) forwards; }
 .conf:nth-child(3n) { background: var(--red); } .conf:nth-child(3n+1) { background: var(--c0); }
 @keyframes fall { to { transform: translateY(260px) rotate(180deg); opacity: 0; } }
-.foot { text-align: center; font-size: 1rem; color: var(--c4); grid-column: 1 / -1; }
+.foot { text-align: center; font-size: 1rem; color: var(--on-page); grid-column: 1 / -1; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -8,6 +8,9 @@
   var demo = !P.apiUrl || (isLocal && qs.get("demo") === "1");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var guest = null;
+  var TEMAS = ["rojo", "amarillo", "cristal", "plata", "charmander", "pocket"];
+  var tema = (qs.get("tema") || P.tema || "rojo").toLowerCase();
+  if (TEMAS.indexOf(tema) > -1) document.documentElement.setAttribute("data-tema", tema);
 
   // ---------- helpers ----------
   function el(tag, attrs, children) {
