@@ -267,6 +267,14 @@
     if (demo) body.appendChild(el("p", { class: "demo", text: "MODO DEMO: las respuestas solo se guardan en este navegador." }));
   }
 
+  // La hoja guarda "Sí"/"No" con acento; la página trabaja con "si"/"no".
+  function normalizeResp(r) {
+    if (!r || !r.asistencia) return null;
+    var a = String(r.asistencia).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    var plus = r.acompanante === true || String(r.acompanante).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === "si";
+    return { asistencia: a === "si" ? "si" : "no", acompanante: plus };
+  }
+
   function applyHonor() {
     var rb = $("ribbon");
     rb.appendChild(sprite("crown"));
@@ -288,7 +296,8 @@
       speak(g.honor
         ? "¡" + g.nombre + "! Estás en mi lista de invitados de honor. Acabo de subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
         : "¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
-      if (g.respuesta && g.respuesta.asistencia) renderStatus(g.respuesta, false); else renderForm(null);
+      var resp = normalizeResp(g.respuesta);
+      if (resp) renderStatus(resp, false); else renderForm(null);
     }).catch(function () {
       speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party!");
       $("rsvp-body").replaceChildren(el("p", { class: "err", text: "No pudimos cargar tu invitación. Recarga la página." }));
