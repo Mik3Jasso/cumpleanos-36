@@ -196,7 +196,7 @@
   }
 
   function renderNoLink() {
-    speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party! " + P.mensaje);
+    speak("¡Voy a subir al nivel 36 y quiero celebrarlo en mi party! " + P.mensaje);
     $("rsvp-body").replaceChildren(
       el("p", { class: "note", text: "Para confirmar necesitas tu link personal de invitación. Si no lo tienes o no te funciona, escríbeme y te lo reenvío." })
     );
@@ -299,12 +299,12 @@
       guest = g;
       if (g.honor) applyHonor();
       speak(g.honor
-        ? "¡" + g.nombre + "! Estás en mi lista de invitadxs de honor. Acabo de subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
-        : "¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
+        ? "¡" + g.nombre + "! Estás en mi lista de invitadxs de honor. Voy a subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
+        : "¡" + g.nombre + "! Voy a subir al nivel 36 y te necesito en mi party. " + P.mensaje);
       var resp = normalizeResp(g.respuesta);
       if (resp) renderStatus(resp, false); else renderForm(null);
     }).catch(function () {
-      speak("¡Acabo de subir al nivel 36 y quiero celebrarlo en mi party!");
+      speak("¡Voy a subir al nivel 36 y quiero celebrarlo en mi party!");
       $("rsvp-body").replaceChildren(el("p", { class: "err", text: "No pudimos cargar tu invitación. Recarga la página." }));
     });
   }
