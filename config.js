@@ -27,7 +27,7 @@ window.PARTY = {
   mensaje: "Trae ganas de pasarla bien. Confirma antes del sábado para guardarte tu lugar.",
 
   // URL del Apps Script publicado (ver SETUP.md). Vacío = modo demo local.
-  apiUrl: "https://script.google.com/macros/s/AKfycbwWvSq-8pCRKRiMpCt22BUqjIUA5ZpBDWVwv9tuMO6Mwd-L793GBgSkPY0EpC6eLSDu/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxFxZCSaOqUebRV3ApK164tJBrXxg8FF0Z025VWFZmdqqQP7xPvscPh1ouxC8iiuKCj/exec",
 
   // Invitados de ejemplo para modo demo (solo en localhost con ?demo=1, o si apiUrl está vacío).
   // Prueba: http://localhost:8765/?demo=1&i=demo-ana  |  &i=demo-luis
