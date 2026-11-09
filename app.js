@@ -70,7 +70,12 @@
       try { saved = JSON.parse(localStorage.getItem("rsvp-demo-" + id)); } catch (e) {}
       return Promise.resolve(g ? { ok: true, nombre: g.nombre, max: g.max, honor: !!g.honor, respuesta: saved } : { ok: false });
     }
-    return fetch(P.apiUrl + "?i=" + encodeURIComponent(id)).then(function (r) { return r.json(); });
+    // 1) POST (no depende de la redirección del GET); 2) si no responde ok, GET
+    function viaGet() { return fetch(P.apiUrl + "?i=" + encodeURIComponent(id)).then(function (r) { return r.json(); }); }
+    return fetch(P.apiUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ accion: "get", id: id }) })
+      .then(function (r) { return r.json(); })
+      .then(function (g) { return g && g.ok ? g : viaGet(); })
+      .catch(viaGet);
   }
   function apiPost(body) {
     if (demo) {

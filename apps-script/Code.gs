@@ -55,17 +55,25 @@ function json_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 
-// GET ?i=ID → datos SOLO de ese invitado
-function doGet(e) {
-  var id = String((e.parameter && e.parameter.i) || "").trim().toLowerCase();
+// Datos SOLO de un invitado (los usa GET y POST accion:"get")
+function lookup_(id) {
   var sh = SpreadsheetApp.getActive().getSheetByName(SHEET);
   var row = find_(sh, id);
-  if (!row) return json_({ ok: false });
+  if (!row) return { ok: false };
   var v = sh.getRange(row, 1, 1, 7).getValues()[0];
   var honor = v[1] === true || String(v[1]).toLowerCase() === "true";
   var out = { ok: true, nombre: String(v[0]).split(" ")[0], honor: honor, max: Number(v[2]) || 1, respuesta: null };
   if (v[5]) out.respuesta = { asistencia: v[5], acompanante: v[6] === "Sí" };
-  return json_(out);
+  return out;
+}
+
+// GET ?i=ID
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  // DIAGNÓSTICO TEMPORAL (borrar esta línea cuando todo funcione): ?debug=1
+  if (p.debug === "1") return json_({ keys: Object.keys(p), qs: (e && e.queryString) || "", i: p.i || "" });
+  var id = String(p.i || "").trim().toLowerCase();
+  return json_(lookup_(id));
 }
 
 // POST {id, asistencia:"si"|"no", acompanante:bool}
@@ -75,6 +83,7 @@ function doPost(e) {
   try {
     var b = JSON.parse(e.postData.contents);
     var id = String(b.id || "").trim().toLowerCase();
+    if (b.accion === "get") return json_(lookup_(id));
     var sh = SpreadsheetApp.getActive().getSheetByName(SHEET);
     var row = find_(sh, id);
     if (!row) return json_({ ok: false, error: "invitado no encontrado" });
