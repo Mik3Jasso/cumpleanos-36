@@ -38,6 +38,7 @@
     star: ["...00...", "...00...", "00000000", ".000000.", "..0000..", "..0..0..", ".0....0.", "0......0"],
     flag: ["0000....", "00000...", "000000..", "0000....", "0.......", "0.......", "0.......", "0......."],
     heart: [".00..00.", "00000000", "00000000", "00000000", ".000000.", "..0000..", "...00...", "........"],
+    alien: ["..0.....0..", "...0...0...", "..0000000..", ".00.000.00.", "00000000000", "0.0000000.0", "0.0.....0.0", "...00.00..."],
     crown: ["0..00..0", "00.00.00", "00000000", "00000000", "00000000", "00000000", "........", "........"],
   };
   function sprite(name) {
@@ -167,10 +168,10 @@
   // ---------- RSVP ----------
   function partyList(plusOn) {
     var ul = el("ul", { class: "party" });
-    ul.appendChild(el("li", { class: guest.honor ? "honor-slot" : "" }, [sprite(guest.honor ? "crown" : "heart"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: guest.honor ? "INVITADO DE HONOR" : "JUGADOR 1" })]));
+    ul.appendChild(el("li", { class: guest.honor ? "honor-slot" : "" }, [sprite(guest.honor ? "crown" : "alien"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: guest.honor ? "INVITADO DE HONOR" : "JUGADOR 1" })]));
     if (guest.max > 1) {
       var li = el("li", { class: plusOn ? "" : "empty" }, [
-        sprite("heart"),
+        sprite("alien"),
         el("span", { text: plusOn ? "ACOMPAÑANTE" : "LUGAR LIBRE" }),
         el("span", { class: "tag", text: "+1" })]);
       ul.appendChild(li);
