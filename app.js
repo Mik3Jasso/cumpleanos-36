@@ -173,7 +173,7 @@
   // ---------- RSVP ----------
   function partyList(plusOn) {
     var ul = el("ul", { class: "party" });
-    ul.appendChild(el("li", { class: guest.honor ? "honor-slot" : "" }, [sprite(guest.honor ? "crown" : "alien"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: guest.honor ? "INVITADO DE HONOR" : "JUGADOR 1" })]));
+    ul.appendChild(el("li", { class: guest.honor ? "honor-slot" : "" }, [sprite(guest.honor ? "crown" : "alien"), el("span", { text: guest.nombre.toUpperCase() }), el("span", { class: "tag", text: guest.honor ? "INVITADX DE HONOR" : "JUGADORX 1" })]));
     if (guest.max > 1) {
       var li = el("li", { class: plusOn ? "" : "empty" }, [
         sprite("alien"),
@@ -209,7 +209,7 @@
       el("h3", { text: yes ? (vip ? "¡LOGRO DESBLOQUEADO!" : "¡NIVEL DESBLOQUEADO!") : "TE VOY A EXTRAÑAR" }),
       el("p", { text: yes ? (vip ? "Tu lugar de honor está confirmado" : "Tu lugar está confirmado") + (r.acompanante ? ", y el de tu acompañante también" : "") + ". Nos vemos el " + P.fechaTexto + "." : "Gracias por avisar. Te voy a extrañar." }),
     ];
-    if (yes && vip) kids.unshift(el("span", { class: "badge", text: "★ INVITADO DE HONOR" }));
+    if (yes && vip) kids.unshift(el("span", { class: "badge", text: "★ INVITADX DE HONOR" }));
     var box = el("div", { class: "unlocked" + (yes ? "" : " no") + (vip ? " honor" : ""), role: "status" }, kids);
     var b = el("button", { class: "btn ghost", type: "button", text: "CAMBIAR RESPUESTA" });
     b.addEventListener("click", function () { renderForm(r); });
@@ -283,7 +283,7 @@
   function applyHonor() {
     var rb = $("ribbon");
     rb.appendChild(sprite("crown"));
-    rb.appendChild(el("span", { text: "INVITADO DE HONOR" }));
+    rb.appendChild(el("span", { text: "INVITADX DE HONOR" }));
     rb.appendChild(sprite("crown"));
     rb.hidden = false;
     $("title-card").classList.add("honor");
@@ -299,7 +299,7 @@
       guest = g;
       if (g.honor) applyHonor();
       speak(g.honor
-        ? "¡" + g.nombre + "! Estás en mi lista de invitados de honor. Acabo de subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
+        ? "¡" + g.nombre + "! Estás en mi lista de invitadxs de honor. Acabo de subir al nivel 36 y no sería lo mismo sin ti. " + P.mensaje
         : "¡" + g.nombre + "! Acabo de subir al nivel 36 y te necesito en mi party. " + P.mensaje);
       var resp = normalizeResp(g.respuesta);
       if (resp) renderStatus(resp, false); else renderForm(null);
