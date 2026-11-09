@@ -9,7 +9,10 @@ Sitio final: **https://cumple.mikejasso.com.mx**
 3. `Extensiones > Apps Script`, pega `apps-script/Code.gs`.
 4. `Implementar > Nueva implementación > Aplicación web`: ejecutar como **Yo**, acceso **Cualquier persona**. Copia la URL `/exec`.
 5. Pega esa URL en `config.js` → `apiUrl`.
-6. Para agregar invitados luego: escribe nombre y max_personas, y usa el menú **Invitación > Generar links**.
+6. Para agregar invitadxs luego: escribe nombre, honor y max_personas, y usa el menú **Invitación > Generar links y mensajes**.
+   Eso llena id, link y la columna `mensaje` (el texto listo para enviar con el link).
+7. Para copiar el mensaje de alguien: selecciona una celda de su fila y usa **Invitación > Copiar mensaje de la fila activa**.
+   Se abre una ventana con el texto y un botón Copiar. El texto base se edita en `MENSAJE_BASE` dentro de `Code.gs`.
 
 ## 2. GitHub Pages
 ```bash
