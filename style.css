@@ -78,10 +78,15 @@ svg.spr { display: block; shape-rendering: crispEdges; }
 #hud-hearts .c0 { fill: var(--red-lt); }
 
 /* Layout */
-.wrap { max-width: 1040px; margin: 0 auto; padding: 24px var(--gut) 40px; display: grid; gap: 24px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 24px var(--gut) 40px; }
+.cols { display: grid; gap: 24px; }
 .hero, .stack { display: grid; gap: 16px; align-content: start; }
 @media (min-width: 900px) {
-  .wrap { grid-template-columns: 5fr 6fr; gap: 32px; padding-top: 40px; align-items: start; }
+  .wrap { padding-top: 40px; }
+  .cols { grid-template-columns: 5fr 6fr; gap: 32px; align-items: start; }
+}
+/* Panel fijo solo si cabe completo en pantalla; así nunca queda cortado ni tapa el pie */
+@media (min-width: 900px) and (min-height: 820px) {
   .hero { position: sticky; top: 24px; }
 }
 
@@ -220,7 +225,7 @@ a:focus-visible, button:focus-visible, .choice:has(input:focus-visible), .check:
 .conf { position: absolute; top: -10px; width: 8px; height: 8px; background: var(--navy); animation: fall 1.8s steps(14) forwards; }
 .conf:nth-child(3n) { background: var(--red); } .conf:nth-child(3n+1) { background: var(--c0); }
 @keyframes fall { to { transform: translateY(260px) rotate(180deg); opacity: 0; } }
-.foot { text-align: center; font-size: 1rem; color: var(--on-page); grid-column: 1 / -1; }
+.foot { text-align: center; font-size: 1rem; color: var(--on-page); margin-top: 32px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
