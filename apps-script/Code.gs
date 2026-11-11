@@ -105,7 +105,7 @@ function lookup_(id) {
   if (!row) return { ok: false };
   var v = sh.getRange(row, 1, 1, 7).getValues()[0];
   var honor = v[1] === true || String(v[1]).toLowerCase() === "true";
-  var out = { ok: true, nombre: String(v[0]).split(" ")[0], honor: honor, max: Number(v[2]) || 1, respuesta: null };
+  var out = { ok: true, nombre: String(v[0]).trim(), honor: honor, max: Number(v[2]) || 1, respuesta: null };
   if (v[5]) out.respuesta = { asistencia: v[5], acompanante: v[6] === "Sí" };
   return out;
 }
